@@ -11,4 +11,6 @@
 
 期望盈亏比，默认为3（表示3:1，是按照损失比例的3倍，比如可以允许的损失比例为5%，那么对应的盈亏比如果设置为3，表示15%）
 
+在线测试地址：https://ponentstock.com/demo
+
 ![image](https://github.com/ponentsoft/stock/blob/main/static/images/WechatIMG91.jpeg)
