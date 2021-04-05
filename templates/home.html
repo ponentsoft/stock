@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Demo - PonentStock</title>
+    <link href="/static/libs/bootstrap@4.6.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%;">
+    <div class="row">
+        <div class="col-md-12 form-inline">
+            <div class="input-group input-group-sm mr-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">计算趋势的最小天数</div>
+                </div>
+                <input class="form-control" id="minDay" aria-label="minDay" placeholder="最小天数" value="20"
+                       style="width: 50px">
+            </div>
+            <div class="input-group input-group-sm mr-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">最大损失比例</div>
+                </div>
+                <input class="form-control" id="lost" aria-label="lost" placeholder="输入比值" value="10"
+                       style="width: 50px">
+            </div>
+            <div class="input-group input-group-sm mr-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">期望盈亏比</div>
+                </div>
+                <input class="form-control" id="rate" aria-label="rate" placeholder="输入比值" value="3"
+                       style="width: 50px">
+            </div>
+            <div class="input-group input-group-sm">
+                <input id="stockCode" type="text" class="form-control" aria-label="stockCode" placeholder="输入股票的代码">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="search"><i class="fas fa-search"></i> 查询
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="demo" style="height: 680px;"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/libs/jquery@3.6.0/jquery.js"></script>
+<script type="text/javascript" src="/static/libs/bootstrap@4.6.0/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/static/libs/echarts@5.0.2/echarts.min.js"></script>
+<script type="text/javascript" src="/static/js/main.js"></script>
+<script>
+    $(function () {
+        let echart = undefined
+        $('#search').on('click', function () {
+            if (echart === undefined)
+                echart = new quotes_echart(document.getElementById('demo'))
+
+            echart.load('/query', {
+                code: $('#stockCode').val(),
+                lost: $('#lost').val(),
+                day: $('#minDay').val(),
+                rate: $('#rate').val()
+            })
+        })
+    })
+</script>
+</body>
+</html>
